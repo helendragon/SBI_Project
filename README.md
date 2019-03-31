@@ -106,4 +106,4 @@ Where _-i /input/hemoglobin/_ is the directory where the PDB files with the inte
 
 The complex that is obtained is the following: 
 
- <img src="hemoglobin.png" > 
+ <img src="hemoglobin.png" width="400" > 
