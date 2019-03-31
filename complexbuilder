@@ -1,0 +1,152 @@
+#!/usr/bin/python3
+import Bio.PDB
+from Bio import BiopythonWarning
+import sys
+import os
+import warnings
+import argparse
+if not sys.warnoptions:
+    warnings.simplefilter("ignore")
+
+
+#our modules
+import folder.functions as folder
+
+#################################################################################
+
+# Argparser arguments
+parser = argparse.ArgumentParser(description="This program creates various macrocomplexes from protein interaction pairs")
+
+parser.add_argument('-i', '--input',
+    dest = "infile",
+    action = "store",
+    default = None,
+    help = "Input PDB formatted file")
+parser.add_argument('-o', '--output',
+    dest = "outfile",
+    action = "store",
+    default = "Complex",
+    help = "outputfile")
+parser.add_argument('-c', '--clashes',
+    dest = "minimum_clash_distance",
+    action = "store",
+    default = 1.5,
+    type = float,
+    help = "Integer specifying the clash distance")
+parser.add_argument('-n', '--number',
+    dest= "number_of_clashes",
+    action= "store",
+    default= 5,
+    type= int,
+    help= "Integer specifying the maximum number of clashes")
+parser.add_argument('-C', '--chains',
+    dest= "number_of_chains_in_the_complex",
+    action= "store",
+    default= 100,
+    type= int,
+    help= "Integer specifying the maximum number of chains in the complex")
+parser.add_argument('-m', '--models',
+    dest= "number_of_models",
+    action= "store",
+    default= 5,
+    type= int,
+    help= "Integer specifying the maximum number of models")
+parser.add_argument( '-u', '--unique',
+    dest = "interactions",
+    action= "store_true",
+    default= False,
+    help= "Activate if there are unique interactions")
+parser.add_argument('-v', '--verbose',
+    dest = "verbose",
+    action = "store_true",
+    default = False,
+    help = "Print log in stderr")
+
+options = parser.parse_args()
+options.infile
+options.verbose
+
+####################################################################################
+
+
+#Here the scripts reads all the pdb files given by the user and saves them into a dictionary --> key: name of the pdb value: structure object.
+
+if options.verbose:
+    sys.stdout.write("Looking for Protein interactions pairs...\n")    
+
+pdb_dict= folder.checking_files(options.infile, parser = options.verbose)
+
+#Now we create a dictionary with the sequences where key: name of the structue + chain value: sequence 
+
+fasta_dict = folder.get_fasta_dictionary(pdb_dict)
+
+#In order to iterate through the dictionary always in the same way, it is sorted by key name and saved into a list of tuples where (name, sequence).
+
+sd = sorted(fasta_dict.items())
+fasta_list=[]
+for k,v in sd:
+    tupla= (k, v)
+    fasta_list.append(tupla)
+
+#With this we can start the pairwise analysis.
+
+if options.verbose:
+    sys.stdout.write("Starting the pairwise analysis...\n")
+
+interaction_setlist = folder.pairwise(fasta_list, pdb_dict)
+
+#Now we have a list of lists with all the interacttions where [[structure1, chain1, structure2, chain2],...]. This means that chain1 (from structure1) interacts with chain2 (from structure2)
+
+
+#Now we create a dictionary to count how many interactions has each structure (counting both chains) - like this we can see which ones are candidates to be used to start creating the complex
+
+Dict={}
+for element in interaction_setlist:
+     Id= element[0].id
+     ch= element[1]
+     key= Id
+     if key not in Dict:
+          Dict[key] = 1
+     else:
+          Dict[key] += 1
+
+# We look for the maximum of interactions and save the possible seeds in a list. We save the structure. Depending on how many possible seeds you have, more or less models will be able to be generated.
+
+maxValue = max(Dict.values())
+possible_seeds = ([key for key in Dict.keys() if Dict[key]==maxValue])
+
+
+seeds = []
+for possible in possible_seeds:
+     for item in interaction_setlist:
+          if item[0].id == possible:
+               seeds.append(item[0])
+               break
+
+
+outputpath= options.outfile
+count = 1
+maximum_models= options.number_of_models
+if options.verbose:
+     sys.stdout.write (str(len(seeds)) + " models can be generated, your maximum is " + str(maximum_models) + "\n")
+
+
+#Now starting from the seed, we start the superimposition of chains to build the complex
+
+if options.verbose:
+    sys.stdout.write("Starting to build the complexes...\n")
+
+
+for seed in seeds:
+     while (count <= options.number_of_models):
+          complex=folder.build_complex(seed, interaction_setlist, options.number_of_clashes, options.minimum_clash_distance, options.interactions, parser=options.verbose, n_max_chains= options.number_of_chains_in_the_complex)
+          folder.save_complex(complex, outputpath, count)
+          if options.verbose:
+               sys.stdout.write ("Model " + str(count) + " generated\n")
+          count += 1
+          break
+
+
+
+
+               
