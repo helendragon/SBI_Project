@@ -21,7 +21,7 @@ parser.add_argument('-i', '--input',
     dest = "infile",
     action = "store",
     default = None,
-    help = "Input FASTA formatted file")
+    help = "Input PDB formatted file")
 parser.add_argument('-o', '--output',
     dest = "outfile",
     action = "store",
@@ -32,30 +32,30 @@ parser.add_argument('-c', '--clashes',
     action = "store",
     default = 1.5,
     type = float,
-    help = "Integer specifying")
+    help = "Integer specifying the clash distance")
 parser.add_argument('-n', '--number',
     dest= "number_of_clashes",
     action= "store",
     default= 5,
     type= int,
-    help= "Integer specifying")
+    help= "Integer specifying the maximum number of clashes")
 parser.add_argument('-C', '--chains',
     dest= "number_of_chains_in_the_complex",
     action= "store",
-    default= 50,
+    default= 100,
     type= int,
-    help= "Integer specifying")
+    help= "Integer specifying the maximum number of chains in the complex")
 parser.add_argument('-m', '--models',
     dest= "number_of_models",
     action= "store",
     default= 5,
     type= int,
-    help= "Integer specifying")
+    help= "Integer specifying the maximum number of models")
 parser.add_argument( '-u', '--unique',
     dest = "interactions",
     action= "store_true",
     default= False,
-    help= "interact")
+    help= "Activate if there are unique interactions")
 parser.add_argument('-v', '--verbose',
     dest = "verbose",
     action = "store_true",
