@@ -94,29 +94,25 @@ In order to run this package with all its functionalities the user must have sev
 
 
 ## Theoretical Background 
-
-ComplexBuilder
-
-
 Developed by Helena Catena and Núria Olvera 
 
 1. Introduction to ComplexBuilder
 
-ComplexBuilder is a command-line application that can be used to reconstruct biological macrocomplexes, which may inclued proteins, DNA or RNA. It is an standalone application that offers several options to the user in order to set the most suitable conditions to build a certain complex.
+    ComplexBuilder is a command-line application that can be used to reconstruct biological macrocomplexes, which may included proteins, DNA or RNA. It is an standalone application that offers several options to the user in order to set the most suitable conditions to build a certain complex.
 
-The quaternary structure of a protein consists in the arrangement of mutiple folded protein subunits in a multi-subunit complex. This structure plays a major role in protein function, but its construction is not an easy task to carry out. The aim of this application is to automate and speed up the process of building a macrocomplex.
+    The quaternary structure of a protein consists in the arrangement of mutiple folded protein subunits in a multi-subunit complex. This structure plays a major role in protein function, but its construction is not an easy task to carry out. The aim of this application is to automate and speed up the process of building a macrocomplex.
 
 2. Algorithm
 
     2.1 Finding PDB files and aligning between them
 
-    First of all, our pipeline searchs in the path given by the user for all the files that are in pdb format. It must be taken into account that only accepts files that contain pair of chains. The program carries out a global pairwise analysis between all the chains, which gives rise to a score. This score is used to calculate the percentage of identity between any pair of chains. If the score is higher than a certain threshold (98% of identity), we consider that those pair of chains can be potentially superimposed, as we assumed that proteins with similar sequence will have a similar fold.
-    
+    First of all, our pipeline searches in the path given by the user for all the files that are in pdb format. It must be taken into account that only accepts files that contain pair of chains. The program carries out a global pairwise analysis between all the chains, which gives rise to a score. This score is used to calculate the percentage of identity between any pair of chains. If the score is higher than a certain threshold (98% of identity), we consider that those pair of chains can be potentially superimposed, as we assumed that proteins with similar sequence will have a similar fold.
+
     2.2 Superimposition
 
     Protein superimposition is the procedure by which two protein structures are placed in space minimizing the distance between the backbone atoms of both structures. This implies that one of the two structures is rotated and translated in space, so that fits as good as possible the coordinated of the other structure.
 
-    ComplexBuilder chooses as a "seed" the pair of interacting proteins that can be potentially superimposed with more chains. In other words, the pair of chains that in the alignment have got an score above the cut-off more times are picked as the seed. The seed will be the initial pair of chains from where the whole complex will be built. For each chain of the complex, the possible subunits that could be superimposed are searched.  First, it is prepared the translation and rotation to minimize the RMSD between the atoms of the fixed (complex) and moving chain. Secondly, the rotation matrix is applied to the other chain to move it from moving structure to the complex. Finally, from an initial structure of two chains, a three chain model might be obtained. The atoms used for performing the superimpositions are the alpha-carbons of each residue and in case there are DNA or RNA molecules, the backbone phosphate is used. 
+    ComplexBuilder chooses as a "seed" the pair of interacting proteins that can be potentially superimposed with more chains. In other words, the pair of chains that in the alignment have got an score above the cut-off more times are picked as the seed. The seed will be the initial pair of chains from where the whole complex will be built. For each chain of the complex, the possible subunits that could be superimposed are searched. First, it is prepared the translation and rotation to minimize the RMSD between the atoms of the fixed (complex) and moving chain. Secondly, the rotation matrix is applied to the other chain to move it from moving structure to the complex. Finally, from an initial structure of two chains, a three chain model might be obtained. The atoms used for performing the superimpositions are the alpha-carbons of each residue and in case there are DNA or RNA molecules, the backbone phosphate is used. 
 
     2.3 Steric clashes
 
@@ -126,19 +122,20 @@ The quaternary structure of a protein consists in the arrangement of mutiple fol
 
     2.3 Several complexes
 
-    The program generates as many macrocomplexes as different seeds has. More than one pair of interacting proteins can have maximum number of possible superimpositions and therefore, all of them should be taken into accout. However, not all the generated macrocomplexes are completely different from each other, giving rise to repeated complexes depending on the structure. For this reason, it is highly recommended to review the models carefully before deciding which is the best representation. 
+    The program generates as many macrocomplexes as different seeds has. More than one pair of interacting proteins can have maximum number of possible superimpositions and therefore, all of them should be taken into account. However, not all the generated macrocomplexes are completely different from each other, giving rise to repeated complexes depending on the structure. For this reason, it is highly recommended to review the models carefully before deciding which is the best representation. 
 
 3. Limitations
 
-* The program is nor able to evaluate the energies of the generated models neither to refine the model. If we have had more time, we might have implemented the automatic assessment of the zscores in Prosa2003. We would also have liked to give the option to the user to optimise the model using Modeller.
+* The program is nor able to evaluate the energies of the generated models neither to refine the model. If we have had more time, we might have implemented the automatic assessment of the zscores in Prosa2003. We would also have liked to give the option to the user to optimize the model using Modeller.
 
-* The program returns several outputs, but we cannot assure if they are completely different or meaningul. If we have had more times, we could have implemented the superimposition between all the generated complexes, removing the repeated proteins or even the proteins with high zscores.
+* The program returns several outputs, but we cannot assure if they are completely different or meaningful. If we have had more times, we could have implemented the superimposition between all the generated complexes, removing the repeated proteins or even the proteins with high zscores.
 
 * It does not have any graphical interface.
 
-* Stoichiometry. The user could has greater control over the input he or she expects. Moreover, fixing the number of chains, we may have avoided some errors that the program makes when builds the complex blindly. 
+* Stoichiometry. The user could have greater control over the input he or she expects. Moreover, fixing the number of chains, we may have avoided some errors that the program makes when builds the complex blindly. 
 
 * The program relies too much in the superimposition between chains that have a high percentage of identity regarding to the sequence. Small errors could be generated every time a chain is added, propagating it in the further steps. A solution could be the assessment of the model every time a chain is added, even though it would have a high computational cost. 
+ 
 
 
 
@@ -161,7 +158,7 @@ The complex that is obtained is the following:
 </p>
 
 This program is able to properly fully reconstruct this complex with the interactions given as we can see in the image above. It has no problem dealing with this type of interactions. <br />
-Once we superpose the complex with the original structure, it can be seen that there nearly no differences between the 2 structures. If we run the MatchMaker tool from chimera we can see that is returns an RMSD of 0.00 A, indicanting that they are indentical.
+Once we superpose the complex with the original structure, it can be seen that there nearly no differences between the 2 structures. If we run the MatchMaker tool from chimera we can see that is returns an RMSD of 0.00 A, indicating that they are identical.
 
 ### Example 2 - Phosphate dehydratase (6ezm)
 
@@ -179,11 +176,11 @@ The complex that is obtained is the following:
 </p>
 
 This program is able to properly fully reconstruct this complex with the interactions given as we can see in the image above. <br />
-Once we superpose the complex with the original structure, it can be seen that there nearly no differences between the 2 structures. If we run the MatchMaker tool from chimera we can see that is returns an RMSD of 0.64 A, indicanting that they are very similar but they have some slight differences between them.
+Once we superpose the complex with the original structure, it can be seen that there nearly no differences between the 2 structures. If we run the MatchMaker tool from chimera we can see that is returns an RMSD of 0.64 A, indicating that they are very similar but they have some slight differences between them.
 
-### Example 3 - Proteosome (4r3o)
+### Example 3 - Proteasome (4r3o)
 
-This example corresponds to the proteosome (PDB: 4r3o). The input provided has all the interactions of the proteins. The proteosome is formed by 14 pairs of components.  <br />
+This example corresponds to the proteasome (PDB: 4r3o). The input provided has all the interactions of the proteins. The proteasome is formed by 14 pairs of components.  <br />
 To obtain the complex we would do:
 
     complexbuilder -i /intputs/proteosome
@@ -197,7 +194,7 @@ The best complex that is obtained is the following:
 </p>
 
 This program is able to properly fully reconstruct this complex with the interactions given as we can see in the image above. <br />
-Once we superpose the complex with the original structure, it can be seen that there nearly no differences between the 2 structures. If we run the MatchMaker tool from chimera we can see that is returns an RMSD of 0.00 A, indicanting that they are indentical.
+Once we superpose the complex with the original structure, it can be seen that there nearly no differences between the 2 structures. If we run the MatchMaker tool from chimera we can see that is returns an RMSD of 0.00 A, indicating that they are identical.
 
 ### Example 4 - Nucleosome (3kuy)
 
@@ -206,7 +203,7 @@ To obtain the complex we would do:
 
     cmplexbuilder 
 
-Here we are not giving any input or output to the program. So it will look for the files in the current directory and will give the outpur as default name in the current directory. It will also make 5 complexes.
+Here we are not giving any input or output to the program. So it will look for the files in the current directory and will give the output as default name in the current directory. It will also make 5 complexes.
 
 The best complex that is obtained is the following:
 
@@ -215,11 +212,12 @@ The best complex that is obtained is the following:
 </p>
 
 This program is able to properly fully reconstruct this complex with the interactions given as we can see in the image above. It has no problem dealing with this type of interactions (Protein and DNA).<br />
-Once we superpose the complex with the original structure, it can be seen that there nearly no differences between the 2 structures. If we run the MatchMaker tool from chimera we can see that is returns an RMSD of 0.00 A, indicanting that they are indentical.
+Once we superpose the complex with the original structure, it can be seen that there nearly no differences between the 2 structures. If we run the MatchMaker tool from chimera we can see that is returns an RMSD of 0.00 A, indicating that they are identical.
+
 
 ### Example 5 - ATP Synthase (5ara)
 
-This example corresponds to the ATP Synthase (PDB: 5ara). It corresponds to a very complex protein, whith a lot of chains and interactions. It is composed by two domains, each one composed respectively by 5 and 8 subunits. Modeling it has been very challenging. Here we are doing it with all the interactions. <br />
+This example corresponds to the ATP Synthase (PDB: 5ara). It corresponds to a very complex protein, with a lot of chains and interactions. It is composed by two domains, each one composed respectively by 5 and 8 subunits. Modeling it has been very challenging. Here we are doing it with all the interactions. <br />
 To obtain the complex we would do:
 
     complexbuilder -i /5ara_all -o /results -c 2.5 
@@ -235,11 +233,11 @@ The best complex that is obtained is the following:
 We can see that the program is not able to perfectly reconstruct the 5ara protein. We see that there are more chains that there should be, due to the high complexity of the protein. However, the overall structure is very well obtained and resembles a lot the real protein.<br />
 Once we superpose the complex with the original structure, we see that it has a RMSD of 0.1 A meaning that there are little deviations between the real structure and our complex.
 
-Moreover, the 5ara structure can also be obtained using the unique interactions (provided in the input folder), however we recomment that the clash distance is increased, so that no extra chains are added to the structure.
+Moreover, the 5ara structure can also be obtained using the unique interactions (provided in the input folder), however we recommend that the clash distance is increased, so that no extra chains are added to the structure.
 
 ### Example 6 - Enterovirus Capsid
 
-This example corresponds to a capsid of an enterovirus (PDB code unknown). The capside is formed by repating units of the same chains, therefore in this case only the unique interactions were used.
+This example corresponds to a capsid of an enterovirus (PDB code unknown).The capsid is formed by repeating units of the same chains, therefore in this case only the unique interactions were used.
 <br />
 To obtain the complex we would do:
 
