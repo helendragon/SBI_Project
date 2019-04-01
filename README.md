@@ -1,4 +1,4 @@
-# SBI-project LALALA
+# SBI-project
 
 A python package for macrocomplex modeling from protein interaction pairs.
 
