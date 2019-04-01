@@ -100,10 +100,35 @@ The following section explains the user how to use our application to make the m
 
 This example corresponds to the hemoglobin (PDB: 1gzx). The input file provided does have the redundant interactions of the protein. To obtain a complex we would do:
 
-    complexbuilder -i /input/hemoglobin/ -o /outputdir/ -m 1
+    complexbuilder -i /inputs/hemoglobin/ -o /outputs/ -m 1
 
-Where _-i /input/hemoglobin/_ is the directory where the PDB files with the interaction pairs are found. The _-o /outputdir/_ is the output directory where the complexed will be saved. Since no name for the complex is provided, it will be saved by the default name. The _-m 1_ means that only 1 model will be made. We decide to do this because the complex to be formed is very simple. The rest of the option are left as default. 
+Where _-i /input/hemoglobin/_ is the directory where the PDB files with the interaction pairs are found. The _-o /outputdir/_ is the output directory where the complexed will be saved. Since no name for the complex is provided, it will be saved by the default name. The _-m 1_ means that only 1 model will be made. We decide to do this because the complex to be formed is very simple. The rest of the option are left as default (clash distance: 1.5 A and minimum of clashes: 5). 
 
 The complex that is obtained is the following: 
+<p align="center">
+    <img src="hemoglobin.png" width="500" > 
+</p>
 
- <img src="hemoglobin.png" width="500" > 
+This program is able to properly fully reconstruct this complex with the interactions given as we can see in the image above. It has no problem dealing with this type of interactions. <br />
+Once we superpose the complex with the original structure, it can be seen that there nearly no differences between the 2 structures. If we run the MatchMaker tool from chimera we can see that is returns an RMSD of 0.00 A, indicanting that they are indentical.
+
+### Example 2 - Phosphate dehydratase (6ezm)
+
+This example corresponds to the phosphatase dehydratase (PDB: 6ezm), the example provided to us by our professors.
+To obtain the complex we would do:
+
+    complexbuilder -i /intputs/example -o /outputs/example.pdb -m 1 -v
+
+This example is very similar to the last one. The input directory is defined and the output as well. However this time we are specifying the name of the output complex (in case that the complex formed cannot be saved in PDB formed, an error will be raised). Here we will also only generate 1 model and will activate the verbose argument. The rest of the arguments are left as default.
+
+The complex that is obtained is the following:
+
+<p align="center">
+    <img src="example.png" width="500" > 
+</p>
+
+This program is able to properly fully reconstruct this complex with the interactions given as we can see in the image above. <br />
+Once we superpose the complex with the original structure, it can be seen that there nearly no differences between the 2 structures. If we run the MatchMaker tool from chimera we can see that is returns an RMSD of 0.00 A, indicanting that they are indentical.
+
+### Example 3 - Proteosome (3kuy)
+
