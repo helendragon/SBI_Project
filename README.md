@@ -98,7 +98,7 @@ The following section explains the user how to use our application to make the m
 
 ### Example 1 - Hemoglobin (1gzx)
 
-This example corresponds to the hemoglobin (PDB: 1gzx). The input file provided does have the redundant interactions of the protein. To obtain a complex we would do:
+This example corresponds to the hemoglobin (PDB: 1gzx). A very simple and small protein. The input file provided does have the redundant interactions of the protein. To obtain a complex we would do:
 
     complexbuilder -i /inputs/hemoglobin/ -o /outputs/ -m 1
 
@@ -128,7 +128,7 @@ The complex that is obtained is the following:
 </p>
 
 This program is able to properly fully reconstruct this complex with the interactions given as we can see in the image above. <br />
-Once we superpose the complex with the original structure, it can be seen that there nearly no differences between the 2 structures. If we run the MatchMaker tool from chimera we can see that is returns an RMSD of 0.64 A, indicanting that they are very similar.
+Once we superpose the complex with the original structure, it can be seen that there nearly no differences between the 2 structures. If we run the MatchMaker tool from chimera we can see that is returns an RMSD of 0.64 A, indicanting that they are very similar but they have some slight differences between them.
 
 ### Example 3 - Proteosome (3kuy)
 
