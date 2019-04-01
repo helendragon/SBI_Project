@@ -174,7 +174,7 @@ To obtain the complex we would do:
 
     complexbuilder -i /5ara_all -o /results -c 2.5 
 
-Here we are giving the input directory and the output directory as well. In this example we are modifying the minimum clash distance, since we have seen that the program makes this protein better when the minimum clash distance is increased (maybedue to the fact the protein is very complex).
+Here we are giving the input directory and the output directory as well. In this example we are modifying the minimum clash distance, since we have seen that the program makes this protein better when the minimum clash distance is increased (maybe due to the fact the protein is very complex).
 
 The best complex that is obtained is the following:
 
