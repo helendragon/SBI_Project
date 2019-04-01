@@ -98,7 +98,8 @@ The following section explains the user how to use our application to make the m
 
 ### Example 1 - Hemoglobin (1gzx)
 
-This example corresponds to the hemoglobin (PDB: 1gzx). A very simple and small protein. The input file provided does have the redundant interactions of the protein. To obtain a complex we would do:
+This example corresponds to the hemoglobin (PDB: 1gzx). A very simple and small protein. The input file provided does have the redundant interactions of the protein. It is composed by 2α and 2β chains. <br /> 
+To obtain a complex we would do:
 
     complexbuilder -i /inputs/hemoglobin/ -o /outputs/ -m 1
 
@@ -114,7 +115,7 @@ Once we superpose the complex with the original structure, it can be seen that t
 
 ### Example 2 - Phosphate dehydratase (6ezm)
 
-This example corresponds to the phosphatase dehydratase (PDB: 6ezm), the example provided to us by our professors.
+This example corresponds to the phosphatase dehydratase (PDB: 6ezm), the example provided to us by our professors. The structure is composed of 24 identical subunits.
 To obtain the complex we would do:
 
     complexbuilder -i /intputs/example -o /outputs/example.pdb -m 1 -v
@@ -132,7 +133,7 @@ Once we superpose the complex with the original structure, it can be seen that t
 
 ### Example 3 - Proteosome (3kuy)
 
-This example corresponds to the proteosome (PDB: 4r3o). The input provided has all the interactions of the proteins.  <br />
+This example corresponds to the proteosome (PDB: 4r3o). The input provided has all the interactions of the proteins. The proteosome is formed by 14 pairs of components.  <br />
 To obtain the complex we would do:
 
     complexbuilder -i /intputs/proteosome
@@ -150,7 +151,7 @@ Once we superpose the complex with the original structure, it can be seen that t
 
 ### Example 4 - Nucleosome (3kuy)
 
-This example corresponds to the nucleosome (PDB: 3kuy). The input provided has all the interactions of the proteins with the DNA.  <br />
+This example corresponds to the nucleosome (PDB: 3kuy). The input provided has all the interactions of the proteins with the DNA. The structure is formed by two copies of core histones H2A, H2B, H3 and H4 and two DNA chains.   <br />
 To obtain the complex we would do:
 
     cmplexbuilder 
@@ -168,7 +169,7 @@ Once we superpose the complex with the original structure, it can be seen that t
 
 ### Example 5 - ATP Synthase (5ara)
 
-This example corresponds to the ATP Synthase (PDB: 5ara). It corresponds to a very complex protein, whith a lot of chains and interactions. Modeling it has been very challenging. Here we are doing it with all the interactions. <br />
+This example corresponds to the ATP Synthase (PDB: 5ara). It corresponds to a very complex protein, whith a lot of chains and interactions. It is composed by two domains, each one composed respectively by 5 and 8 subunits. Modeling it has been very challenging. Here we are doing it with all the interactions. <br />
 To obtain the complex we would do:
 
     complexbuilder -i /5ara_all -o /results -c 2.5 
